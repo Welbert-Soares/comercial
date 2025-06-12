@@ -1,0 +1,115 @@
+{
+	"folders": [
+		{
+			"name": "Dashboard Comercial",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"**/*.tmp": true,
+			"**/*.log": true,
+			"**/~*": true
+		},
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/bower_components": true,
+			"**/*.code-search": true,
+			"**/.vscode": false
+		},
+		"files.associations": {
+			"*.md": "markdown",
+			"*.json": "jsonc",
+			"*.pbix": "binary"
+		},
+		"markdown.preview.breaks": true,
+		"markdown.preview.linkify": true,
+		"markdown.preview.typographer": true,
+		"editor.wordWrap": "on",
+		"editor.rulers": [80, 120],
+		"editor.tabSize": 2,
+		"editor.insertSpaces": true,
+		"files.encoding": "utf8",
+		"files.eol": "\r\n",
+		"terminal.integrated.defaultProfile.windows": "PowerShell",
+		"git.ignoreLimitWarning": true,
+		"explorer.sortOrder": "type",
+		"explorer.confirmDelete": false,
+		"explorer.confirmDragAndDrop": false
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.powershell",
+			"yzhang.markdown-all-in-one",
+			"davidanson.vscode-markdownlint",
+			"ms-vscode.vscode-json",
+			"streetsidesoftware.code-spell-checker",
+			"ms-vscode.theme-tomorrowkit",
+			"ms-python.python",
+			"redhat.vscode-yaml"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Abrir Dashboard",
+				"type": "shell",
+				"command": "start",
+				"args": ["dashboard/dashboard_comercial_1.pbix"],
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "Gerar Backup",
+				"type": "shell",
+				"command": "powershell",
+				"args": [
+					"-Command",
+					"$date = Get-Date -Format 'yyyyMMdd_HHmmss'; Copy-Item 'dashboard/dashboard_comercial_1.pbix' \"dashboard/backup/dashboard_comercial_1_backup_$date.pbix\"; Write-Host 'Backup criado com sucesso!'"
+				],
+				"group": "build",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "Validar Projeto",
+				"type": "shell",
+				"command": "powershell",
+				"args": [
+					"-Command",
+					"Write-Host '=== ESTRUTURA DO PROJETO ===' -ForegroundColor Green; Get-ChildItem -Recurse | Where-Object {!$_.PSIsContainer} | Select-Object Name, @{Name='Size(KB)';Expression={[math]::Round($_.Length/1KB,2)}}, LastWriteTime | Format-Table -AutoSize"
+				],
+				"group": "test",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"problemMatcher": []
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": []
+	}
+}

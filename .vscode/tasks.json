@@ -1,0 +1,173 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Abrir Dashboard Power BI",
+            "type": "shell",
+            "command": "start",
+            "args": ["dashboard/dashboard_comercial_1.pbix"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Abre o dashboard principal do Power BI"
+        },
+        {
+            "label": "Abrir Dados Excel",
+            "type": "shell", 
+            "command": "start",
+            "args": ["csv/Dados_Comerciais.xlsx"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Abre a fonte de dados principal em Excel"
+        },
+        {
+            "label": "Gerar Backup Dashboard",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Copy-Item 'dashboard/dashboard_comercial_1.pbix' \"dashboard/backup/dashboard_comercial_1_backup_$(Get-Date -Format 'yyyyMMdd_HHmmss').pbix\""
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Cria backup do dashboard com timestamp"
+        },
+        {
+            "label": "Validar Estrutura Projeto",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Get-ChildItem -Recurse | Select-Object FullName, Length, LastWriteTime | Format-Table -AutoSize"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Lista todos os arquivos do projeto com detalhes"
+        },
+        {
+            "label": "Verificar Tamanho Arquivos",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Get-ChildItem -Recurse | Measure-Object -Property Length -Sum | Select-Object @{Name='TotalSizeMB';Expression={[math]::Round($_.Sum/1MB,2)}}, Count"
+            ],
+            "group": "test", 
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Calcula o tamanho total do projeto"
+        },
+        {
+            "label": "Exportar PDF Dashboard",
+            "type": "shell",
+            "command": "echo",
+            "args": ["Para exportar PDF: Arquivo > Exportar > PDF no Power BI Desktop"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Instruções para exportar relatório em PDF"
+        },
+        {
+            "label": "Atualizar Documentação",
+            "type": "shell",
+            "command": "echo",
+            "args": ["Lembre-se de atualizar CHANGELOG.md e incrementar versão no project.json"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always", 
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Lembrete para manter documentação atualizada"
+        },
+        {
+            "label": "Checar Links Documentação",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Get-Content README.md, doc/*.md | Select-String -Pattern '\\[.*\\]\\(.*\\)' | ForEach-Object { $_.Line.Trim() }"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Lista todos os links dos documentos markdown"
+        },
+        {
+            "label": "Limpar Arquivos Temporários",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Remove-Item -Path '*.tmp', '*.log', '*~*' -Force -ErrorAction SilentlyContinue; Write-Host 'Arquivos temporários removidos'"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Remove arquivos temporários do projeto"
+        },
+        {
+            "label": "Criar Release Package",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "$date = Get-Date -Format 'yyyyMMdd'; Compress-Archive -Path 'dashboard/', 'doc/', 'README.md', 'CHANGELOG.md', 'project.json' -DestinationPath \"releases/dashboard_comercial_v1.0_$date.zip\" -Force"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Cria package de release com versionamento"
+        }
+    ]
+}

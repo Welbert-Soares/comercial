@@ -1,0 +1,284 @@
+{
+  "project": {
+    "name": "Dashboard Comercial Power BI",
+    "version": "1.0.0",
+    "description": "Análise completa de performance comercial com insights estratégicos para vendas, segmentação de mercado e otimização de rede",
+    "author": "Welbert",
+    "created": "2025-06-01",
+    "lastUpdated": "2025-06-11",
+    "status": "production",
+    "type": "business-intelligence",
+    "platform": "power-bi"
+  },
+  
+  "business": {
+    "domain": "comercial",
+    "industry": "varejo-eletronicos",
+    "kpis": {
+      "primary": [
+        "Valor Total de Vendas",
+        "Participação por Segmento",
+        "Performance por Fabricante",
+        "Distribuição por Categoria"
+      ],
+      "secondary": [
+        "Ticket Médio",
+        "Performance por Loja",
+        "Produtividade por Vendedor",
+        "Concentração de Mercado"
+      ]
+    },
+    "segments": [
+      "Doméstico",
+      "Corporativo", 
+      "Industrial"
+    ],
+    "categories": [
+      "Eletrodomésticos",
+      "Celulares",
+      "Eletrônicos",
+      "Eletroportáteis"
+    ],
+    "totalRevenue": "R$ 359.310,00",
+    "storesCount": 14,
+    "salesTeamSize": 3,
+    "manufacturersCount": 12
+  },
+
+  "technical": {
+    "powerBI": {
+      "version": "Desktop Latest",
+      "fileSize": "~15MB",
+      "dataModel": "import",
+      "refreshMode": "manual",
+      "pages": 4,
+      "visuals": 15,
+      "measures": 8,
+      "relationships": "star-schema"
+    },
+    "dataSource": {
+      "primary": {
+        "type": "excel",
+        "file": "Dados_Comerciais.xlsx",
+        "location": "./csv/",
+        "encoding": "UTF-8",
+        "sheets": ["Vendas", "Dimensões"]
+      }
+    },
+    "requirements": {
+      "software": "Microsoft Power BI Desktop",
+      "os": "Windows 10+",
+      "ram": "4GB minimum, 8GB recommended",
+      "storage": "2GB free space"
+    }
+  },
+
+  "files": {
+    "dashboard": {
+      "main": "dashboard/dashboard_comercial_1.pbix",
+      "backup": "dashboard/backup/",
+      "exports": "pdf/"
+    },
+    "data": {
+      "source": "csv/Dados_Comerciais.xlsx",
+      "processed": "data/processed/",
+      "archive": "data/archive/"
+    },
+    "documentation": {
+      "readme": "README.md",
+      "changelog": "CHANGELOG.md",
+      "userManual": "doc/manual_usuario.md",
+      "technicalSpecs": "doc/especificacoes_tecnicas.md",
+      "detailedAnalysis": "doc/analise_detalhada.md",
+      "useCases": "doc/casos_uso.md"
+    }
+  },
+
+  "insights": {
+    "marketConcentration": {
+      "domestic": "71.47%",
+      "corporate": "25.03%",
+      "industrial": "3.49%"
+    },
+    "topManufacturers": [
+      {"name": "Brastemp", "share": "25.82%", "revenue": "R$ 92,786k"},
+      {"name": "Samsung", "share": "23.10%", "revenue": "R$ 83,000k"},
+      {"name": "Consul", "share": "16.42%", "revenue": "R$ 59,000k"}
+    ],
+    "categoryPerformance": [
+      {"name": "Eletrodomésticos", "share": "53.8%", "revenue": "R$ 193,32k"},
+      {"name": "Celulares", "share": "27.4%", "revenue": "R$ 98,60k"},
+      {"name": "Eletrônicos", "share": "13.5%", "revenue": "R$ 48,33k"},
+      {"name": "Eletroportáteis", "share": "5.3%", "revenue": "R$ 19,06k"}
+    ],
+    "opportunities": [
+      "Eletroportáteis: categoria sub-explorada (5.3%)",
+      "B2B expansion: corporativo + industrial = 28.52%",
+      "Diversificação de fabricantes: reduzir concentração top 3",
+      "Otimização de rede: equalizar performance entre lojas"
+    ],
+    "risks": [
+      "Alta dependência do segmento doméstico (71.47%)",
+      "Concentração em poucos fabricantes",
+      "Disparidade entre pontos de venda",
+      "Ticket médio baixo no segmento principal"
+    ]
+  },
+
+  "businessCases": {
+    "strategic": [
+      {
+        "id": "case-001",
+        "title": "Expansão Eletroportáteis",
+        "goal": "Aumentar participação de 5.3% para 8%",
+        "impact": "R$ 9,64k incremento estimado",
+        "timeline": "6 meses",
+        "priority": "alta"
+      },
+      {
+        "id": "case-002", 
+        "title": "Estratégia B2B Premium",
+        "goal": "Aumentar B2B de 28.52% para 35%",
+        "impact": "R$ 23,3k incremento estimado",
+        "timeline": "12 meses",
+        "priority": "alta"
+      },
+      {
+        "id": "case-003",
+        "title": "Diversificação Fornecedores",
+        "goal": "Reduzir concentração top 3 de 65% para 55%",
+        "impact": "Redução de risco operacional",
+        "timeline": "9 meses",
+        "priority": "média"
+      }
+    ],
+    "operational": [
+      {
+        "id": "case-004",
+        "title": "Otimização Rede Vendas",
+        "goal": "Equalizar performance entre lojas +15%",
+        "impact": "R$ 53,9k incremento estimado",
+        "timeline": "3 meses",
+        "priority": "alta"
+      },
+      {
+        "id": "case-005",
+        "title": "Performance Vendedores",
+        "goal": "Padronizar performance individual",
+        "impact": "Aumento produtividade geral",
+        "timeline": "6 meses",
+        "priority": "média"
+      }
+    ]
+  },
+
+  "roadmap": {
+    "v1.1": {
+      "target": "2025-09-01",
+      "features": [
+        "Análise temporal com drill-down",
+        "Forecasting automático",
+        "Dashboard mobile-friendly",
+        "Alertas por email",
+        "Power BI Service integration"
+      ]
+    },
+    "v1.2": {
+      "target": "2025-12-01", 
+      "features": [
+        "Row Level Security (RLS)",
+        "API REST integration",
+        "Machine Learning analytics",
+        "CRM integration",
+        "Advanced forecasting"
+      ]
+    },
+    "v2.0": {
+      "target": "2026-06-01",
+      "features": [
+        "Azure Synapse migration",
+        "Real-time streaming",
+        "Python/R integration",
+        "Natural language queries",
+        "Advanced AI insights"
+      ]
+    }
+  },
+
+  "performance": {
+    "currentMetrics": {
+      "loadTime": "8 seconds",
+      "refreshTime": "2 minutes",
+      "fileSize": "15MB",
+      "concurrentUsers": "10 max",
+      "visualRenderTime": "<3 seconds"
+    },
+    "targets": {
+      "loadTime": "<5 seconds",
+      "refreshTime": "<1 minute", 
+      "fileSize": "<20MB",
+      "concurrentUsers": "25 max",
+      "visualRenderTime": "<2 seconds"
+    }
+  },
+
+  "governance": {
+    "dataOwner": "Equipe Comercial",
+    "businessOwner": "Gerência Comercial",
+    "technicalOwner": "Welbert",
+    "updateFrequency": "Semanal",
+    "reviewCycle": "Mensal",
+    "retentionPolicy": "24 meses",
+    "backupSchedule": "Diário",
+    "securityLevel": "Interno"
+  },
+
+  "training": {
+    "materials": [
+      "Manual do Usuário (doc/manual_usuario.md)",
+      "Casos de Uso Práticos (doc/casos_uso.md)",
+      "Video tutorials (planejado)",
+      "Workshop presencial (agendado)"
+    ],
+    "targetAudience": [
+      "Gerência Comercial",
+      "Equipe de Vendas",
+      "Analistas de Negócio",
+      "Coordenadores de Loja"
+    ],
+    "learningObjectives": [
+      "Interpretar KPIs principais",
+      "Usar filtros e navegação",
+      "Exportar relatórios",
+      "Identificar oportunidades",
+      "Tomar decisões baseadas em dados"
+    ]
+  },
+
+  "success": {
+    "metrics": [
+      "Usuários ativos semanais",
+      "Frequência de uso do dashboard", 
+      "Número de insights gerados",
+      "Decisões implementadas baseadas em dados",
+      "ROI mensurável das ações"
+    ],
+    "targets": {
+      "adoption": "80% da equipe comercial",
+      "usage": "2x por semana mínimo",
+      "insights": "5+ por mês",
+      "decisions": "3+ por trimestre",
+      "roi": "15%+ crescimento vendas"
+    }
+  },
+
+  "support": {
+    "documentation": "Completa e atualizada",
+    "training": "Manual + workshops",
+    "maintenance": "Mensal",
+    "troubleshooting": "doc/manual_usuario.md#troubleshooting",
+    "contact": "welbert@empresa.com",
+    "helpdesk": "Ticket interno",
+    "sla": "48h para resolução"
+  }
+}
